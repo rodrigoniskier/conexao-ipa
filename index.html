@@ -22,10 +22,9 @@
             --glass-border: rgba(255, 255, 255, 0.15);
             --text-secondary: #e0e0e0;
 
-            /* --- DIMENSÕES PARA 2 CARDS EXATOS --- */
+            /* --- DIMENSÕES PARA 2 CARDS --- */
             --card-width: 40vw; 
             --track-gap: 2vw;
-            /* Calcula a largura total necessária para exibir exatamente 2 cards e 1 gap */
             --visible-width: calc(2 * var(--card-width) + var(--track-gap));
         }
 
@@ -83,7 +82,6 @@
             position: relative; z-index: 5; 
             flex-grow: 1; 
             display: flex; align-items: center; 
-            /* Define a largura exata da área visível e centraliza na tela */
             width: var(--visible-width); 
             margin: 0 auto; 
             overflow: hidden; 
@@ -91,10 +89,8 @@
         
         .track { 
             display: flex; height: 65vh; 
-            /* Removemos a margem esquerda aqui, pois o viewport já está centralizado */
             gap: var(--track-gap);
             will-change: transform;
-            /* Garante que a trilha seja larga o suficiente para os 3 cards do buffer */
             min-width: calc(3 * var(--card-width) + 2 * var(--track-gap));
         }
         
@@ -156,9 +152,15 @@
             background: rgba(255,255,255,0.08); border-radius: 0 6px 6px 0;
         }
 
-        /* --- IMAGENS --- */
+        /* --- IMAGENS (CORREÇÃO DE COLAPSO AQUI) --- */
         .image-frame {
-            width: 100%; aspect-ratio: 1/1; 
+            width: 100%; 
+            /* Mudança Crucial: Definir altura mínima e impedir encolhimento */
+            height: auto; 
+            aspect-ratio: 1/1; 
+            flex-shrink: 0; /* IMPEDE O NAVEGADOR DE ESMAGAR A IMAGEM */
+            min-height: 250px; /* Garante que ela sempre apareça */
+            
             border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             background-size: cover; background-position: center; align-self: center;
         }
@@ -174,7 +176,7 @@
         .card-eleicoes .image-frame { width: 90%; margin: 0 auto; }
 
         .card-casal .layout-foto { grid-template-columns: 1fr 1.2fr; gap: 1rem; }
-        .card-casal .image-frame { aspect-ratio: 4/3; width: 100%; }
+        .card-casal .image-frame { aspect-ratio: 4/3; width: 100%; min-height: 300px; }
 
         /* --- FOOTER --- */
         .footer-area {
