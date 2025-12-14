@@ -11,7 +11,7 @@
 
     <style>
         :root {
-            /* --- CORES (Hype) --- */
+            /* --- CORES --- */
             --color-yellow: #F4B400;
             --color-blue: #00A4E4;
             --color-green: #7DBF38;
@@ -22,7 +22,7 @@
             --glass-border: rgba(255, 255, 255, 0.15);
             --text-secondary: #e0e0e0;
 
-            /* --- DIMENSÕES PARA 2 CARDS --- */
+            /* --- DIMENSÕES --- */
             --card-width: 40vw; 
             --track-gap: 2vw;
             --visible-width: calc(2 * var(--card-width) + var(--track-gap));
@@ -35,7 +35,7 @@
             display: flex; flex-direction: column; color: #fff;
         }
 
-        /* --- FUNDO & ANIMAÇÕES --- */
+        /* --- FUNDO --- */
         .bg-animate {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, var(--color-orange), transparent 30%, transparent 70%, var(--color-blue), var(--color-yellow));
@@ -77,7 +77,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* --- VIEWPORT CENTRALIZADO --- */
+        /* --- VIEWPORT --- */
         .viewport { 
             position: relative; z-index: 5; 
             flex-grow: 1; 
@@ -99,7 +99,7 @@
             display: flex; justify-content: center; align-items: center; flex-shrink: 0;
         }
 
-        /* --- CARD DESIGN --- */
+        /* --- CARD --- */
         .glass-panel {
             width: 100%; height: 100%;
             background: rgba(20, 20, 30, 0.75); 
@@ -126,7 +126,7 @@
         .tag {
             position: absolute; top: 2rem; left: 2rem; 
             padding: 8px 18px; border-radius: 100px;
-            font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px;
+            font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 10;
         }
         .tag-sabia { background: var(--color-blue); color: #fff; }
@@ -134,49 +134,53 @@
         .tag-fique { background: var(--color-green); color: #fff; }
         .tag-niver { background: var(--color-yellow); color: #000; }
 
-        /* --- TIPOGRAFIA --- */
+        /* --- TIPOGRAFIA (Ajustada para leitura) --- */
         .glass-panel h2 {
-            font-family: 'Outfit', sans-serif; font-size: 2.2rem; 
+            font-family: 'Outfit', sans-serif; font-size: 2.3rem; 
             font-weight: 800; line-height: 1.1; margin: 0 0 1rem 0; color: #fff; width: 100%;
         }
         .glass-panel p {
-            font-family: 'Inter', sans-serif; font-size: 1.25rem; 
+            font-family: 'Inter', sans-serif; font-size: 1.35rem; /* Fonte base aumentada */
             line-height: 1.5; color: var(--text-secondary); margin: 0; font-weight: 500;
         }
         strong { color: var(--accent-glow); font-weight: 700; }
 
         .footnote {
-            display: block; margin-top: 15px; font-size: 0.9rem; line-height: 1.3;
+            display: block; margin-top: 15px; font-size: 0.95rem; line-height: 1.3;
             color: rgba(255,255,255,0.7); font-style: italic;
             border-left: 3px solid var(--accent-glow); padding: 8px 12px; 
             background: rgba(255,255,255,0.08); border-radius: 0 6px 6px 0;
         }
 
-        /* --- IMAGENS (CORREÇÃO DE COLAPSO AQUI) --- */
+        /* --- IMAGENS (ANTI-ZOOM HACK) --- */
         .image-frame {
-            width: 100%; 
-            /* Mudança Crucial: Definir altura mínima e impedir encolhimento */
-            height: auto; 
+            /* TRUQUE: Usar 'vh' (viewport height) em vez de width/px.
+               Isso faz a imagem manter uma proporção com a TELA, não com o ZOOM do texto.
+            */
+            height: 28vh; 
+            width: auto; 
             aspect-ratio: 1/1; 
-            flex-shrink: 0; /* IMPEDE O NAVEGADOR DE ESMAGAR A IMAGEM */
-            min-height: 250px; /* Garante que ela sempre apareça */
             
+            flex-shrink: 0; /* Impede achatamento */
             border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             background-size: cover; background-position: center; align-self: center;
+            justify-self: center;
         }
+        
+        /* Ajuste fino para imagens específicas */
         .qr-style { background-color: #fff; background-size: contain; background-repeat: no-repeat; border: 6px solid #fff; }
         .photo-style { border: 3px solid var(--accent-glow); background-position: center top; }
 
         /* --- ESPECIFICIDADES --- */
         .card-fique-ligado .text-content { justify-content: flex-start; height: 100%; }
-        .card-fique-ligado p { font-size: 1.6rem; } 
+        .card-fique-ligado p { font-size: 1.7rem; } 
 
         .card-eleicoes .layout-foto { align-items: center; }
-        .card-eleicoes p { font-size: 1.4rem; }
-        .card-eleicoes .image-frame { width: 90%; margin: 0 auto; }
-
+        .card-eleicoes p { font-size: 1.5rem; }
+        
+        /* Ajuste do card casal para a nova lógica de imagem */
         .card-casal .layout-foto { grid-template-columns: 1fr 1.2fr; gap: 1rem; }
-        .card-casal .image-frame { aspect-ratio: 4/3; width: 100%; min-height: 300px; }
+        .card-casal .image-frame { aspect-ratio: 4/3; height: 32vh; } /* Um pouco maior verticalmente */
 
         /* --- FOOTER --- */
         .footer-area {
@@ -209,7 +213,6 @@
     </div>
 
     <script>
-        // --- DADOS PRESERVADOS ---
         const avisos = [
             {
                 categoria: "Aniversariantes",
@@ -312,10 +315,8 @@
             progressBar.style.transition = `width ${TEMPO_LEITURA}ms linear`; progressBar.style.width = '100%';
             
             setTimeout(() => {
-                // Movimento: largura do card (40vw) + gap (2vw) = 42vw
                 track.style.transition = `transform ${TEMPO_TRANSICAO}ms cubic-bezier(0.25, 1, 0.5, 1)`;
                 track.style.transform = 'translateX(-42vw)'; 
-                
                 setTimeout(() => {
                     currentIndex = (currentIndex + 1) % avisos.length;
                     track.style.transition = 'none'; track.style.transform = 'translateX(0)';
