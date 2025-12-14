@@ -191,12 +191,19 @@
             gap: 10px; /* Reduzido para aproximar logo e slogan */
             margin-bottom: 15px; flex-grow: 1;
         }
-        .footer-logo { height: 70px; width: auto; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6)); }
+        
+        .footer-logo { 
+            height: 70px; 
+            width: auto; 
+            /* ALTERAÇÃO AQUI: Brilho 1.2 e Sombra Branca para contraste forte */
+            filter: brightness(1.2) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)); 
+        }
+        
         .slogan {
             font-family: 'Playfair Display', serif; font-style: italic;
             font-size: 1.8rem; color: var(--primary-gold); margin: 0;
             letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-            line-height: 1; /* Alinha melhor verticalmente com a imagem */
+            line-height: 1; 
         }
         .progress-container { width: 100%; height: 6px; background: rgba(255,255,255,0.1); }
         .progress-bar { height: 100%; background: var(--primary-gold); width: 0%; box-shadow: 0 0 15px var(--primary-gold); }
