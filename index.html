@@ -7,167 +7,167 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&family=Playfair+Display:ital,wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary-gold: #d4af37;
-            --secondary-gold: #f9eac3;
-            --glass-bg: rgba(12, 16, 24, 0.85); 
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --text-main: #ffffff;
-            --text-dim: #e0e0e0;
+            /* --- CORES (Hype) --- */
+            --color-yellow: #F4B400;
+            --color-blue: #00A4E4;
+            --color-green: #7DBF38;
+            --color-orange: #E84F25;
+            --accent-glow: var(--color-yellow);
             
-            /* --- CONFIGURAÇÃO ÚNICA (TV/DESKTOP) --- */
+            --bg-deep: #050510;
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-secondary: #e0e0e0;
+
+            /* --- DIMENSÕES PARA 2 CARDS EXATOS --- */
             --card-width: 40vw; 
-            --track-margin: 10vw; 
+            --track-gap: 2vw;
+            /* Calcula a largura total necessária para exibir exatamente 2 cards e 1 gap */
+            --visible-width: calc(2 * var(--card-width) + var(--track-gap));
         }
 
         body {
             margin: 0; padding: 0;
-            overflow: hidden;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #050a10;
-            height: 100vh;
-            display: flex; flex-direction: column;
-            color: #fff;
+            overflow: hidden; font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep); height: 100vh;
+            display: flex; flex-direction: column; color: #fff;
         }
 
-        /* --- FUNDO --- */
-        .bg-image {
+        /* --- FUNDO & ANIMAÇÕES --- */
+        .bg-animate {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* Imagem Natalina Neutra */
-            background-image: url('back.png'); 
-            background-size: cover; background-position: center;
-            z-index: 0; 
-            transform: scale(1.0); 
-            filter: blur(0px) brightness(1.0);
+            background: linear-gradient(135deg, var(--color-orange), transparent 30%, transparent 70%, var(--color-blue), var(--color-yellow));
+            background-size: 400% 400%; animation: gradientBG 30s ease infinite;
+            z-index: 1; opacity: 0.8; mix-blend-mode: overlay;
         }
-        #particles-js { position: absolute; top:0; left:0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        @keyframes gradientBG { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        
+        .bg-overlay-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('back.png'); background-size: cover; background-position: center;
+            z-index: 0; filter: brightness(0.6);
+        }
+        
+        #particles-js { position: absolute; top:0; left:0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
 
         /* --- HEADER --- */
         header {
-            position: relative; z-index: 10;
-            padding: 1vh 4vw;
-            display: flex; justify-content: space-between; align-items: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-            height: 14vh; box-sizing: border-box; 
+            position: relative; z-index: 10; height: 14vh;
+            padding: 1vh 4vw; display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
         }
 
         .brand h1 {
-            font-size: 3.8rem; 
-            font-weight: 900;
-            text-transform: uppercase; margin: 0; letter-spacing: -3px;
-            background: linear-gradient(to right, #fff, var(--secondary-gold));
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.8rem; font-weight: 900;
+            text-transform: uppercase; margin: 0; letter-spacing: -2px;
+            white-space: nowrap;
+            background: linear-gradient(to right bottom, #ffffff 30%, var(--accent-glow) 50%, #ffffff 70%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 5px 20px rgba(0,0,0,0.8);
-        }
-
-        .header-info {
-            text-align: right; font-weight: 700; text-transform: uppercase;
-            font-size: 1.1rem; color: var(--primary-gold); letter-spacing: 2px;
-            border-left: 4px solid var(--primary-gold); padding-left: 15px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-        }
-
-        /* --- VIEWPORT --- */
-        .viewport {
-            position: relative; z-index: 5;
-            flex-grow: 1; display: flex; align-items: center;
-            width: 100%; overflow: hidden;
-            mask-image: linear-gradient(to right, transparent 5%, black 10%, black 90%, transparent 90.1%);
-            -webkit-mask-image: linear-gradient(to right, transparent 5%, black 10%, black 90%, transparent 90.1%);
-        }
-
-        .track { 
-            display: flex; height: 65vh; width: 150vw; 
-            margin-left: var(--track-margin); 
-            will-change: transform; 
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.8));
         }
         
-        .card-container { 
-            width: var(--card-width); 
-            height: 100%; 
-            padding: 0 1vw; box-sizing: border-box; 
-            display: flex; justify-content: center; align-items: center; 
+        .header-info {
+            text-align: right; font-weight: 700; text-transform: uppercase;
+            font-size: 1.1rem; color: var(--accent-glow); letter-spacing: 2px;
+            background: rgba(0,0,0,0.5); padding: 12px 24px; border-radius: 50px;
+            backdrop-filter: blur(10px); border: 1px solid var(--glass-border);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* --- DESIGN DO CARD --- */
-        .glass-panel {
-            width: 100%; height: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border); border-radius: 20px;
-            padding: 4.5rem 2rem 2rem 2rem; 
-            box-sizing: border-box;
-            display: flex; flex-direction: column; justify-content: flex-start; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
-            position: relative; 
+        /* --- VIEWPORT CENTRALIZADO --- */
+        .viewport { 
+            position: relative; z-index: 5; 
+            flex-grow: 1; 
+            display: flex; align-items: center; 
+            /* Define a largura exata da área visível e centraliza na tela */
+            width: var(--visible-width); 
+            margin: 0 auto; 
             overflow: hidden; 
         }
         
-        .layout-foto {
-            display: grid;
-            grid-template-columns: 1.3fr 1fr; 
-            gap: 1.5rem; 
-            align-content: start; 
-            height: 100%;
+        .track { 
+            display: flex; height: 65vh; 
+            /* Removemos a margem esquerda aqui, pois o viewport já está centralizado */
+            gap: var(--track-gap);
+            will-change: transform;
+            /* Garante que a trilha seja larga o suficiente para os 3 cards do buffer */
+            min-width: calc(3 * var(--card-width) + 2 * var(--track-gap));
+        }
+        
+        .card-container { 
+            width: var(--card-width); height: 100%; 
+            display: flex; justify-content: center; align-items: center; flex-shrink: 0;
         }
 
-        .layout-foto .text-content { height: 100%; justify-content: flex-start; }
-        .text-content { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
+        /* --- CARD DESIGN --- */
+        .glass-panel {
+            width: 100%; height: 100%;
+            background: rgba(20, 20, 30, 0.75); 
+            backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
+            border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 5rem 2rem 2.5rem 2rem; 
+            box-sizing: border-box;
+            display: flex; flex-direction: column; justify-content: flex-start; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7); 
+            position: relative; overflow: hidden;
+        }
+        
+        .layout-foto {
+            display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem; 
+            align-content: start; height: 100%;
+        }
+
+        .text-content { 
+            z-index: 2; display: flex; flex-direction: column; align-items: flex-start; width: 100%; 
+            height: 100%; justify-content: flex-start;
+        }
+
+        /* --- TAGS --- */
+        .tag {
+            position: absolute; top: 2rem; left: 2rem; 
+            padding: 8px 18px; border-radius: 100px;
+            font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 10;
+        }
+        .tag-sabia { background: var(--color-blue); color: #fff; }
+        .tag-cons { background: var(--color-orange); color: #fff; }
+        .tag-fique { background: var(--color-green); color: #fff; }
+        .tag-niver { background: var(--color-yellow); color: #000; }
 
         /* --- TIPOGRAFIA --- */
-        .tag {
-            position: absolute; top: 1.5rem; left: 2rem;
-            padding: 6px 16px; border-radius: 6px;
-            font-size: 0.8rem; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 2;
-        }
-
-        .tag-sabia { background: linear-gradient(135deg, #1e3c72, #2a5298); color: #fff; }
-        .tag-cons { background: linear-gradient(135deg, #8E0E00, #4a0000); color: #fff; }
-        .tag-fique { background: linear-gradient(135deg, #134E5E, #71B280); color: #fff; }
-        .tag-niver { background: linear-gradient(135deg, #FFD700, #FDB931); color: #000; text-shadow: none;}
-
         .glass-panel h2 {
-            font-size: 2.0rem; 
-            font-weight: 800; line-height: 1.1; 
-            margin: 0 0 1rem 0; color: #fff; text-shadow: 0 2px 5px rgba(0,0,0,0.5); width: 100%;
+            font-family: 'Outfit', sans-serif; font-size: 2.2rem; 
+            font-weight: 800; line-height: 1.1; margin: 0 0 1rem 0; color: #fff; width: 100%;
         }
-
         .glass-panel p {
-            font-size: 1.2rem; 
-            line-height: 1.4; color: var(--text-main); margin: 0; font-weight: 500;
+            font-family: 'Inter', sans-serif; font-size: 1.25rem; 
+            line-height: 1.5; color: var(--text-secondary); margin: 0; font-weight: 500;
         }
-
-        strong { color: var(--primary-gold); font-weight: 700; }
+        strong { color: var(--accent-glow); font-weight: 700; }
 
         .footnote {
             display: block; margin-top: 15px; font-size: 0.9rem; line-height: 1.3;
-            color: var(--text-dim); font-style: italic; border-left: 3px solid var(--primary-gold); 
-            padding: 8px 12px; background: rgba(255,255,255,0.08); border-radius: 0 6px 6px 0;
+            color: rgba(255,255,255,0.7); font-style: italic;
+            border-left: 3px solid var(--accent-glow); padding: 8px 12px; 
+            background: rgba(255,255,255,0.08); border-radius: 0 6px 6px 0;
         }
 
         /* --- IMAGENS --- */
         .image-frame {
             width: 100%; aspect-ratio: 1/1; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); align-self: center; 
+            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background-size: cover; background-position: center; align-self: center;
         }
-        
-        .qr-style {
-            border-radius: 12px; background-color: white; background-size: contain; 
-            background-repeat: no-repeat; background-position: center; border: 6px solid white;
-        }
-        
-        .photo-style {
-            border-radius: 12px; background-size: cover; background-position: center top; 
-            border: 3px solid var(--primary-gold);
-        }
+        .qr-style { background-color: #fff; background-size: contain; background-repeat: no-repeat; border: 6px solid #fff; }
+        .photo-style { border: 3px solid var(--accent-glow); background-position: center top; }
 
-        /* --- CSS ESPECÍFICO --- */
+        /* --- ESPECIFICIDADES --- */
         .card-fique-ligado .text-content { justify-content: flex-start; height: 100%; }
-        .card-fique-ligado p { font-size: 1.5rem; line-height: 1.5; }
+        .card-fique-ligado p { font-size: 1.6rem; } 
 
         .card-eleicoes .layout-foto { align-items: center; }
         .card-eleicoes p { font-size: 1.4rem; }
@@ -176,81 +176,45 @@
         .card-casal .layout-foto { grid-template-columns: 1fr 1.2fr; gap: 1rem; }
         .card-casal .image-frame { aspect-ratio: 4/3; width: 100%; }
 
-        /* --- FOOTER (ALTO CONTRASTE) --- */
+        /* --- FOOTER --- */
         .footer-area {
-            position: relative; z-index: 10; padding-bottom: 0;
-            background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 30%, transparent 100%);
-            height: 15vh; 
-            display: flex; flex-direction: column; justify-content: flex-end;
-            backdrop-filter: blur(3px);
+            position: relative; z-index: 10; height: 15vh; 
+            display: flex; align-items: center; justify-content: center; gap: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,1), transparent);
         }
-        
-        .footer-content {
-            display: flex; justify-content: center; align-items: center;
-            gap: 15px; 
-            margin-bottom: 20px; flex-grow: 1;
-        }
-        
-        .footer-logo { 
-            height: 75px; 
-            width: auto; 
-            filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.4)); 
-        }
-        
-        .slogan {
-            font-family: 'Playfair Display', serif; font-style: italic;
-            font-size: 1.9rem; 
-            color: var(--primary-gold); 
-            margin: 0;
-            letter-spacing: 1px; 
-            line-height: 1; 
-            text-shadow: 2px 2px 0px #000000, 0 0 10px rgba(0,0,0,0.8);
-            font-weight: 600; 
-        }
-
-        .progress-container { width: 100%; height: 6px; background: rgba(255,255,255,0.1); }
-        .progress-bar { height: 100%; background: var(--primary-gold); width: 0%; box-shadow: 0 0 15px var(--primary-gold); }
-
+        .footer-logo { height: 75px; width: auto; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+        .slogan { font-family: 'Outfit', sans-serif; font-size: 1.6rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 3px; font-weight: 800; }
+        .progress-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: rgba(255,255,255,0.1); }
+        .progress-bar { height: 100%; background: var(--accent-glow); width: 0%; box-shadow: 0 0 20px var(--accent-glow); }
     </style>
 </head>
 <body>
-
-    <div class="bg-image"></div>
+    <div class="bg-overlay-img"></div>
+    <div class="bg-animate"></div>
     <canvas id="particles-js"></canvas>
 
     <header>
-        <div class="brand">
-            <h1>Conexão IP Altiplano</h1>
-        </div>
-        <div class="header-info">
-            Informativo Semanal
-        </div>
+        <div class="brand"><h1>Conexão IP Altiplano</h1></div>
+        <div class="header-info">Informativo Semanal</div>
     </header>
 
-    <div class="viewport">
-        <div class="track" id="track"></div>
-    </div>
+    <div class="viewport"><div class="track" id="track"></div></div>
 
     <div class="footer-area">
-        <div class="footer-content">
-            <img src="logo.jpg" alt="Logo IP Altiplano" class="footer-logo" onerror="this.style.display='none'"> 
-            <div class="slogan">"Encontros e Propósitos"</div>
-        </div>
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
+        <img src="logo.jpg" alt="Logo" class="footer-logo" onerror="this.style.display='none'"> 
+        <div class="slogan">Encontros e Propósitos</div>
+        <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
     </div>
 
     <script>
-        // --- DADOS ---
+        // --- DADOS PRESERVADOS ---
         const avisos = [
             {
                 categoria: "Aniversariantes",
                 tipo: "tag-niver",
                 titulo: "Bodas de Oliveira <br>34 anos",
                 texto: "Parabéns ao casal <strong>Abelson e Maria José</strong> que celebraram a fidelidade de Deus no matrimônio no dia 11 de Dezembro. <br>Que o Senhor continue abençoando esta união.<br>",
-                img: "casal.jpg", 
-                isQR: false,
+                img: "casal.jpg", isQR: false,
                 extraClass: "card-casal"
             },
             {
@@ -258,8 +222,7 @@
                 tipo: "tag-cons",
                 titulo: "Curso de Formação de Líderes e Oficiais",
                 texto: "Destinado aos homens, membros e congregados da IPA. Confira no qr code as informações.",
-                img: "cflo.jpg", 
-                isQR: true,
+                img: "cflo.jpg", isQR: true,
                 extraClass: ""
             },
             {
@@ -267,7 +230,7 @@
                 tipo: "tag-sabia",
                 titulo: "Como é dividido o nosso Manual?",
                 texto: "O Manual Presbiteriano é dividido em 3 partes fundamentais:<br><br><strong>1.</strong> Constituição da Igreja (CI/IPB)<br><strong>2.</strong> Código de Disciplina (CD/IPB)<br><strong>3.</strong> Princípios de Liturgia (PL/IPB)",
-                img: null,
+                img: null, 
                 extraClass: ""
             },
             {
@@ -275,7 +238,7 @@
                 tipo: "tag-fique",
                 titulo: "Turma de Novos Membros",
                 texto: "O início da nova turma será em <strong>Fevereiro de 2026</strong>.<br><br>Interessados devem procurar o Pastor Debson Dias (coordenador da EBD) para realizar a matrícula.",
-                img: null,
+                img: null, 
                 extraClass: "card-fique-ligado"
             },
             {
@@ -283,7 +246,7 @@
                 tipo: "tag-sabia",
                 titulo: "Que são duas as Assembleias da Igreja?",
                 texto: "Existem dois tipos de Assembleias Gerais na igreja local:<br><br><strong>1. Ordinária</strong> (Obrigatória, anual)<br><strong>2. Extraordinária</strong> (Sempre que necessário)<br><small class='footnote'><strong>Artigo 9º (CI/IPB):</strong> A assembleia geral da igreja constará de todos os membros em plena comunhão e se reunirá ordinariamente, ao menos uma vez por ano, e, extraordinariamente, convocada pelo Conselho.</small>",
-                img: null,
+                img: null, 
                 extraClass: ""
             },
              {
@@ -291,8 +254,7 @@
                 tipo: "tag-cons",
                 titulo: "Eleições",
                 texto: "<br>Edital 2026 para Eleição de Presbítero e Diáconos da IPA.<br> <br><br>Confira no qr code as informações.",
-                img: "edital.jpg",
-                isQR: true,
+                img: "edital.jpg", isQR: true,
                 extraClass: "card-eleicoes"
             },
              {
@@ -300,26 +262,21 @@
                 tipo: "tag-sabia",
                 titulo: "Que a Assembleia Geral Ordinária possui uma Finalidade específica?",
                 texto: "Ela não é apenas uma reunião qualquer. Ela possui finalidades específicas e obrigatórias definidas em nosso Estatuto.<br><small class='footnote'><strong>Artigo 18º (CI/IPB):</strong> A Assembleia Geral se reunirá ordinariamente, ao menos uma vez por ano, para tratar da matéria mencionada no inciso IV do Artigo 17º e para eleger um secretário de atas.</small>",
-                img: null,
+                img: null, 
                 extraClass: ""
             }
         ];
 
-        // --- SISTEMA ---
         const track = document.getElementById('track');
         const progressBar = document.getElementById('progressBar');
-        const TEMPO_LEITURA = 13000; 
-        const TEMPO_TRANSICAO = 1200; 
+        const TEMPO_LEITURA = 13000; const TEMPO_TRANSICAO = 1200; 
         let currentIndex = 0;
 
         function createCard(data) {
             let layoutClass = data.img ? 'glass-panel layout-foto' : 'glass-panel';
-            if (data.extraClass) {
-                layoutClass += ` ${data.extraClass}`;
-            }
+            if (data.extraClass) layoutClass += ` ${data.extraClass}`;
 
             let imgHtml = '';
-            
             if (data.img) {
                 let imgStyle = data.isQR ? 'image-frame qr-style' : 'image-frame photo-style';
                 imgHtml = `<div class="${imgStyle}" style="background-image: url('${data.img}');"></div>`;
@@ -349,66 +306,45 @@
         }
 
         function runCarousel() {
-            progressBar.style.transition = 'none';
-            progressBar.style.width = '0%';
-            void progressBar.offsetWidth;
-            progressBar.style.transition = `width ${TEMPO_LEITURA}ms linear`;
-            progressBar.style.width = '100%';
-
+            progressBar.style.transition = 'none'; progressBar.style.width = '0%'; void progressBar.offsetWidth;
+            progressBar.style.transition = `width ${TEMPO_LEITURA}ms linear`; progressBar.style.width = '100%';
+            
             setTimeout(() => {
+                // Movimento: largura do card (40vw) + gap (2vw) = 42vw
                 track.style.transition = `transform ${TEMPO_TRANSICAO}ms cubic-bezier(0.25, 1, 0.5, 1)`;
-                track.style.transform = 'translateX(-40vw)';
-
+                track.style.transform = 'translateX(-42vw)'; 
+                
                 setTimeout(() => {
                     currentIndex = (currentIndex + 1) % avisos.length;
-                    track.style.transition = 'none';
-                    track.style.transform = 'translateX(0)';
-                    render();
-                    runCarousel();
+                    track.style.transition = 'none'; track.style.transform = 'translateX(0)';
+                    render(); runCarousel();
                 }, TEMPO_TRANSICAO);
             }, TEMPO_LEITURA);
         }
 
-        // --- PARTÍCULAS ---
+        // Partículas
         const canvas = document.getElementById('particles-js');
         const ctx = canvas.getContext('2d');
         let particles = [];
         function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener('resize', resize); resize();
-
         class Particle {
             constructor() { this.reset(); }
             reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = canvas.height + 50;
-                this.speed = Math.random() * 0.8 + 0.2;
-                this.size = Math.random() * 3 + 1.5; 
-                this.opacity = Math.random() * 0.5 + 0.1;
-                this.drift = (Math.random() - 0.5) * 0.5;
+                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+                this.speed = Math.random() * 0.2 + 0.1; this.size = Math.random() * 2 + 0.5; 
+                this.opacity = Math.random() * 0.5; this.fadeDir = Math.random() > 0.5 ? 0.005 : -0.005;
             }
             update() {
-                this.y -= this.speed;
-                this.x += this.drift;
-                if (this.y < -50) this.reset();
+                this.y -= this.speed; this.opacity += this.fadeDir;
+                if(this.opacity <= 0 || this.opacity >= 0.6) this.fadeDir = -this.fadeDir;
+                if (this.y < 0) this.reset();
             }
-            draw() {
-                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
-            }
+            draw() { ctx.fillStyle = `rgba(244, 180, 0, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
         }
-        
-        for(let i=0; i<200; i++) particles.push(new Particle());
-        
-        function animate() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        render();
-        runCarousel();
-
+        for(let i=0; i<120; i++) particles.push(new Particle());
+        function animate() { ctx.clearRect(0,0,canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        animate(); render(); runCarousel();
     </script>
 </body>
 </html>
