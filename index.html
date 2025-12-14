@@ -80,17 +80,13 @@
         /* --- VIEWPORT --- */
         .viewport { 
             position: relative; z-index: 5; 
-            flex-grow: 1; 
-            display: flex; align-items: center; 
-            width: var(--visible-width); 
-            margin: 0 auto; 
-            overflow: hidden; 
+            flex-grow: 1; display: flex; align-items: center; 
+            width: var(--visible-width); margin: 0 auto; overflow: hidden; 
         }
         
         .track { 
             display: flex; height: 65vh; 
-            gap: var(--track-gap);
-            will-change: transform;
+            gap: var(--track-gap); will-change: transform;
             min-width: calc(3 * var(--card-width) + 2 * var(--track-gap));
         }
         
@@ -105,7 +101,8 @@
             background: rgba(20, 20, 30, 0.75); 
             backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
             border: 1px solid var(--glass-border); border-radius: 20px;
-            padding: 5rem 2rem 2.5rem 2rem; 
+            /* Padding levemente ajustado para comportar texto maior */
+            padding: 4.5rem 1.8rem 2rem 1.8rem; 
             box-sizing: border-box;
             display: flex; flex-direction: column; justify-content: flex-start; 
             box-shadow: 0 30px 60px rgba(0,0,0,0.7); 
@@ -113,7 +110,8 @@
         }
         
         .layout-foto {
-            display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem; 
+            display: grid; grid-template-columns: 1.3fr 1fr; 
+            gap: 1rem; /* Gap reduzido para dar espaço ao texto */
             align-content: start; height: 100%;
         }
 
@@ -122,11 +120,12 @@
             height: 100%; justify-content: flex-start;
         }
 
-        /* --- TAGS --- */
+        /* --- TAGS (ZOOM) --- */
         .tag {
-            position: absolute; top: 2rem; left: 2rem; 
-            padding: 8px 18px; border-radius: 100px;
-            font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px;
+            position: absolute; top: 1.8rem; left: 1.8rem; 
+            padding: 10px 22px; border-radius: 100px;
+            font-size: 1rem; /* +25% */
+            font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 10;
         }
         .tag-sabia { background: var(--color-blue); color: #fff; }
@@ -134,53 +133,51 @@
         .tag-fique { background: var(--color-green); color: #fff; }
         .tag-niver { background: var(--color-yellow); color: #000; }
 
-        /* --- TIPOGRAFIA (Ajustada para leitura) --- */
+        /* --- TIPOGRAFIA (ZOOM DE 25%) --- */
         .glass-panel h2 {
-            font-family: 'Outfit', sans-serif; font-size: 2.3rem; 
-            font-weight: 800; line-height: 1.1; margin: 0 0 1rem 0; color: #fff; width: 100%;
+            font-family: 'Outfit', sans-serif; 
+            font-size: 2.9rem; /* Aumentado de 2.3 para 2.9 (+25%) */
+            font-weight: 800; line-height: 1.05; 
+            margin: 0 0 0.8rem 0; color: #fff; width: 100%;
         }
+        
         .glass-panel p {
-            font-family: 'Inter', sans-serif; font-size: 1.35rem; /* Fonte base aumentada */
-            line-height: 1.5; color: var(--text-secondary); margin: 0; font-weight: 500;
+            font-family: 'Inter', sans-serif; 
+            font-size: 1.7rem; /* Aumentado de 1.35 para 1.7 (+25%) */
+            line-height: 1.4; /* Line-height um pouco mais justo para caber */
+            color: var(--text-secondary); margin: 0; font-weight: 500;
         }
+        
         strong { color: var(--accent-glow); font-weight: 700; }
 
         .footnote {
-            display: block; margin-top: 15px; font-size: 0.95rem; line-height: 1.3;
+            display: block; margin-top: 15px; 
+            font-size: 1.1rem; /* Zoom também na nota */
+            line-height: 1.3;
             color: rgba(255,255,255,0.7); font-style: italic;
-            border-left: 3px solid var(--accent-glow); padding: 8px 12px; 
+            border-left: 4px solid var(--accent-glow); padding: 8px 12px; 
             background: rgba(255,255,255,0.08); border-radius: 0 6px 6px 0;
         }
 
-        /* --- IMAGENS (ANTI-ZOOM HACK) --- */
+        /* --- IMAGENS (ESTÁVEIS) --- */
         .image-frame {
-            /* TRUQUE: Usar 'vh' (viewport height) em vez de width/px.
-               Isso faz a imagem manter uma proporção com a TELA, não com o ZOOM do texto.
-            */
-            height: 28vh; 
-            width: auto; 
-            aspect-ratio: 1/1; 
-            
-            flex-shrink: 0; /* Impede achatamento */
+            height: 28vh; width: auto; aspect-ratio: 1/1; 
+            flex-shrink: 0; 
             border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            background-size: cover; background-position: center; align-self: center;
-            justify-self: center;
+            background-size: cover; background-position: center; align-self: center; justify-self: center;
         }
-        
-        /* Ajuste fino para imagens específicas */
         .qr-style { background-color: #fff; background-size: contain; background-repeat: no-repeat; border: 6px solid #fff; }
         .photo-style { border: 3px solid var(--accent-glow); background-position: center top; }
 
         /* --- ESPECIFICIDADES --- */
         .card-fique-ligado .text-content { justify-content: flex-start; height: 100%; }
-        .card-fique-ligado p { font-size: 1.7rem; } 
+        .card-fique-ligado p { font-size: 2.1rem; } /* Zoom extra para texto curto */
 
         .card-eleicoes .layout-foto { align-items: center; }
-        .card-eleicoes p { font-size: 1.5rem; }
+        .card-eleicoes p { font-size: 1.9rem; }
         
-        /* Ajuste do card casal para a nova lógica de imagem */
         .card-casal .layout-foto { grid-template-columns: 1fr 1.2fr; gap: 1rem; }
-        .card-casal .image-frame { aspect-ratio: 4/3; height: 32vh; } /* Um pouco maior verticalmente */
+        .card-casal .image-frame { aspect-ratio: 4/3; height: 32vh; }
 
         /* --- FOOTER --- */
         .footer-area {
@@ -325,7 +322,6 @@
             }, TEMPO_LEITURA);
         }
 
-        // Partículas
         const canvas = document.getElementById('particles-js');
         const ctx = canvas.getContext('2d');
         let particles = [];
