@@ -15,7 +15,7 @@
 --color-blue: #00A4E4;
 --color-green: #7DBF38;
 --color-orange: #E84F25;
---color-purple: #9D4EDD; /* Nova cor para Calendário */
+--color-purple: #9D4EDD;
 --accent-glow: var(--color-yellow);
 --bg-deep: #050510;
 --glass-border: rgba(255, 255, 255, 0.15);
@@ -130,7 +130,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 10;
 .tag-cons { background: var(--color-orange); color: #fff; }
 .tag-fique { background: var(--color-green); color: #fff; }
 .tag-niver { background: var(--color-yellow); color: #000; }
-.tag-cal { background: var(--color-purple); color: #fff; } /* Nova Tag */
+.tag-cal { background: var(--color-purple); color: #fff; }
 
 /* --- TIPOGRAFIA GERAL (Padrão Grande) --- */
 .glass-panel h2 {
@@ -227,7 +227,7 @@ const avisos = [
     titulo: "14/Dez • Dupla Celebração",
     texto: "<strong>Dia da Esposa de Pastor</strong><br><em>\"O SENHOR te abençoe e te guarde... o SENHOR sobre ti levante o rosto e te dê a paz.\" (Nm 6:24-26)</em><br><br><span style='display:block; height: 1px; background: rgba(255,255,255,0.2); margin: 12px 0;'></span><strong>Dia da Bíblia</strong><br><em>\"Não cesses de falar deste Livro da Lei; antes, medita nele dia e noite...\" (Js 1:8)</em>",
     img: null,
-    extraClass: "card-niver-agrupado" // Reutiliza estilo para fonte menor
+    extraClass: "card-niver-agrupado"
 },
 {
     // CARD NASCIMENTO NOAH
@@ -239,11 +239,11 @@ const avisos = [
     extraClass: "card-fique-ligado"
 },
 {
-    // CARD COMBINADO SEM FOTOS
+    // CARD COMBINADO SEM FOTOS (ATUALIZADO)
     categoria: "Aniversariantes",
     tipo: "tag-niver",
     titulo: "Celebrações da Semana",
-    texto: "<strong>Bodas de Oliveira (34 anos)</strong><br>Parabéns ao casal Abelson e Maria José pela fidelidade de Deus no matrimônio dia 11/Dez.<br><br><span style='display:block; height: 1px; background: rgba(255,255,255,0.2); margin: 15px 0;'></span><strong>Aniversário</strong><br>Parabéns Yêdda Franca. Louvado seja Deus por mais um ano de vida.",
+    texto: "<strong>Casamentos</strong><br>Parabéns aos casais Abelson e Maria José (11/Dez) e Evandro e Rebeca.<br><br><span style='display:block; height: 1px; background: rgba(255,255,255,0.2); margin: 12px 0;'></span><strong>Aniversariantes</strong><br>Parabéns Yêdda Franca e Aniara. Louvado seja Deus pela vida de vocês.",
     img: null, // Sem imagem
     isQR: false,
     extraClass: "card-niver-agrupado"
