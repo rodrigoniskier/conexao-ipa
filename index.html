@@ -16,6 +16,7 @@
 --color-green: #7DBF38;
 --color-orange: #E84F25;
 --color-purple: #9D4EDD;
+--color-pink: #FF006E;
 --accent-glow: var(--color-yellow);
 --bg-deep: #050510;
 --glass-border: rgba(255, 255, 255, 0.15);
@@ -131,6 +132,8 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 10;
 .tag-fique { background: var(--color-green); color: #fff; }
 .tag-niver { background: var(--color-yellow); color: #000; }
 .tag-cal { background: var(--color-purple); color: #fff; }
+.tag-aconteceu { background: var(--color-pink); color: #fff; }
+.tag-avisos { background: linear-gradient(135deg, var(--color-blue), var(--color-purple)); color: #fff; }
 
 /* --- TIPOGRAFIA GERAL (Padrão Grande) --- */
 .glass-panel h2 {
@@ -162,10 +165,22 @@ aspect-ratio: 1/1;
 flex-shrink: 0;
 min-height: 250px;
 border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-background-size: cover; background-position: center; align-self: center;
+background-size: contain; /* ALTERADO: contain ao invés de cover para evitar ampliação */
+background-position: center;
+background-repeat: no-repeat; /* ADICIONADO: para evitar repetição da imagem */
 }
-.qr-style { background-color: #fff; background-size: contain; background-repeat: no-repeat; border: 6px solid #fff; }
-.photo-style { border: 3px solid var(--accent-glow); background-position: center top; }
+.qr-style { 
+background-color: #fff; 
+background-size: contain; 
+background-repeat: no-repeat; 
+border: 6px solid #fff; 
+}
+.photo-style { 
+border: 3px solid var(--accent-glow); 
+background-size: contain; /* ALTERADO: contain para manter proporção original */
+background-repeat: no-repeat;
+background-position: center; 
+}
 
 /* --- ESPECIFICIDADES --- */
 .card-fique-ligado .text-content { justify-content: flex-start; height: 100%; }
@@ -175,17 +190,35 @@ background-size: cover; background-position: center; align-self: center;
 .card-eleicoes p { font-size: 1.6rem; }
 .card-eleicoes .image-frame { width: 90%; margin: 0 auto; }
 
-/* --- NOVO: Card de Aniversariantes e Calendário Agrupados (Sem Foto) --- */
-/* Reduz o tamanho da fonte apenas nestes cards para caber textos longos/duplos */
-.card-niver-agrupado h2 {
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
+/* --- Card de Aniversariantes com Fotos --- */
+.card-aniversariante h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
 }
-.card-niver-agrupado p {
-    font-size: 1.25rem;
+.card-aniversariante p {
+    font-size: 1.35rem;
     line-height: 1.4;
 }
 
+/* --- Card Aconteceu IPA --- */
+.card-aconteceu h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.card-aconteceu p {
+    font-size: 1.5rem;
+    line-height: 1.45;
+}
+
+/* --- Card Avisos --- */
+.card-avisos h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+}
+.card-avisos p {
+    font-size: 1.4rem;
+    line-height: 1.45;
+}
 
 /* --- FOOTER --- */
 .footer-area {
@@ -193,7 +226,13 @@ position: relative; z-index: 10; height: 15vh;
 display: flex; align-items: center; justify-content: center; gap: 20px;
 background: linear-gradient(to top, rgba(0,0,0,1), transparent);
 }
-.footer-logo { height: 75px; width: auto; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+.footer-logo { 
+height: 75px; 
+width: auto; 
+filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+max-width: none; /* ADICIONADO: permite tamanho natural */
+object-fit: contain; /* ADICIONADO: mantém proporção */
+}
 .slogan { font-family: 'Outfit', sans-serif; font-size: 1.8rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 3px; font-weight: 800; }
 .progress-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: rgba(255,255,255,0.1); }
 .progress-bar { height: 100%; background: var(--accent-glow); width: 0%; box-shadow: 0 0 20px var(--accent-glow); }
@@ -221,80 +260,114 @@ background: linear-gradient(to top, rgba(0,0,0,1), transparent);
 // --- DADOS ATUALIZADOS ---
 const avisos = [
 {
-    // CARD CALENDÁRIO PRESBITERIANO
-    categoria: "Calendário Presbiteriano",
-    tipo: "tag-cal",
-    titulo: "14/Dez • Dupla Celebração",
-    texto: "<strong>Dia da Esposa de Pastor</strong><br><em>\"O SENHOR te abençoe e te guarde... o SENHOR sobre ti levante o rosto e te dê a paz.\" (Nm 6:24-26)</em><br><br><span style='display:block; height: 1px; background: rgba(255,255,255,0.2); margin: 12px 0;'></span><strong>Dia da Bíblia</strong><br><em>\"Não cesses de falar deste Livro da Lei; antes, medita nele dia e noite...\" (Js 1:8)</em>",
-    img: null,
-    extraClass: "card-niver-agrupado"
+    // CARD ACONTECEU IPA - Dia do Pastor
+    categoria: "Aconteceu IPA",
+    tipo: "tag-aconteceu",
+    titulo: "Dia do Pastor Presbiteriano!",
+    texto: "O último dia 17 foi o dia do pastor presbiteriano.<br><br><strong>Oremos e apoiemos os nossos pastores!</strong>",
+    img: "pastor.jpg",
+    isQR: false,
+    extraClass: "card-aconteceu"
 },
 {
-    // CARD NASCIMENTO NOAH
-    categoria: "Fique ligado",
-    tipo: "tag-fique",
-    titulo: "Seja Bem-vindo, Noah!",
-    texto: "Glorificamos a Deus pelo nascimento de <strong>Noah</strong>.<br><br>Filho dos nossos queridos irmãos Tiago e Amanda. Que o Senhor abençoe esta família com muita graça e saúde.",
-    img: null,
-    extraClass: "card-fique-ligado"
-},
-{
-    // CARD COMBINADO SEM FOTOS (ATUALIZADO)
+    // CARD ANIVERSARIANTES - Rev. Adriano
     categoria: "Aniversariantes",
     tipo: "tag-niver",
-    titulo: "Celebrações da Semana",
-    texto: "<strong>Casamentos</strong><br>Parabéns aos casais Abelson e Maria José (11/Dez) e Evandro e Rebeca.<br><br><span style='display:block; height: 1px; background: rgba(255,255,255,0.2); margin: 12px 0;'></span><strong>Aniversariantes</strong><br>Parabéns Yêdda Franca e Aniara. Louvado seja Deus pela vida de vocês.",
-    img: null, // Sem imagem
+    titulo: "Aniversário do Rev. Adriano",
+    texto: "Dia 17 foi o aniversário do nosso pastor.<br><br>Louvamos a Deus pela sua vida e ministério.<br><br><strong>Deus seja louvado e renove as suas forças!</strong>",
+    img: "adriano.jpg",
     isQR: false,
-    extraClass: "card-niver-agrupado"
+    extraClass: "card-aniversariante"
 },
 {
-categoria: "Deliberações do Conselho",
-tipo: "tag-cons",
-titulo: "Curso de Formação de Líderes e Oficiais",
-texto: "Destinado aos homens, membros e congregados da IPA. Confira no qr code as informações.",
-img: "cflo.jpg", isQR: true,
-extraClass: ""
+    // CARD ANIVERSARIANTES - Presb. Rodrigo
+    categoria: "Aniversariantes",
+    tipo: "tag-niver",
+    titulo: "Aniversário do Presb. Rodrigo",
+    texto: "Dia 19 foi o aniversário do Presb. Rodrigo Niskier.<br><br>Louvamos a Deus pela sua vida e ministério.<br><br><strong>Deus seja louvado e renove as suas forças!</strong>",
+    img: "rodrigo.jpg",
+    isQR: false,
+    extraClass: "card-aniversariante"
 },
 {
-categoria: "Você Sabia?",
-tipo: "tag-sabia",
-titulo: "Como é dividido o nosso Manual?",
-texto: "O Manual Presbiteriano é dividido em 3 partes fundamentais:<br><br><strong>1.</strong> Constituição da Igreja (CI/IPB)<br><strong>2.</strong> Código de Disciplina (CD/IPB)<br><strong>3.</strong> Princípios de Liturgia (PL/IPB)",
-img: null,
-extraClass: ""
+    // CARD ANIVERSARIANTES - Django
+    categoria: "Aniversariantes",
+    tipo: "tag-niver",
+    titulo: "Aniversário de Django",
+    texto: "Dia 20 foi o aniversário do nosso querido irmão Django.<br><br><strong>Louvamos a Deus pela vida do irmão e pela benção que ele é em nosso meio!</strong>",
+    img: "django.jpg",
+    isQR: false,
+    extraClass: "card-aniversariante"
 },
 {
-categoria: "Fique ligado",
-tipo: "tag-fique",
-titulo: "Turma de Novos Membros",
-texto: "O início da nova turma será em <strong>Fevereiro de 2026</strong>.<br><br>Interessados devem procurar o Pastor Debson Dias (coordenador da EBD) para realizar a matrícula.",
-img: null,
-extraClass: "card-fique-ligado"
+    // CARD AVISOS - Culto de Natal
+    categoria: "Avisos",
+    tipo: "tag-avisos",
+    titulo: "Culto de Natal - Brilha Jesus!",
+    texto: "Hoje (21/12), no louvor do culto de celebração, teremos uma participação do coral.<br><br><strong>Vamos louvar ao Senhor!</strong>",
+    img: null,
+    isQR: false,
+    extraClass: "card-avisos"
 },
 {
-categoria: "Você Sabia?",
-tipo: "tag-sabia",
-titulo: "Que são duas as Assembleias da Igreja?",
-texto: "Existem dois tipos de Assembleias Gerais na igreja local:<br><br><strong>1. Ordinária</strong> (Obrigatória, anual)<br><strong>2. Extraordinária</strong> (Sempre que necessário)<br><small class='footnote'><strong>Artigo 9º (CI/IPB):</strong> A assembleia geral da igreja constará de todos os membros em plena comunhão e se reunirá ordinariamente, ao menos uma vez por ano, e, extraordinariamente, convocada pelo Conselho.</small>",
-img: null,
-extraClass: ""
+    // CARD AVISOS - Culto de Final de Ano
+    categoria: "Avisos",
+    tipo: "tag-avisos",
+    titulo: "Culto de Final de Ano!",
+    texto: "No dia <strong>31/12</strong>, às <strong>22h</strong>, será o nosso culto da virada.<br><br><strong>Venha com o coração cheio de gratidão e esperança!</strong>",
+    img: null,
+    isQR: false,
+    extraClass: "card-avisos"
 },
 {
-categoria: "Deliberações do Conselho",
-tipo: "tag-cons",
-titulo: "Eleições",
-texto: "<br>Edital 2026 para Eleição de Presbítero e Diáconos da IPA.<br> <br><br>Confira no qr code as informações.",
-img: "edital.jpg", isQR: true,
-extraClass: "card-eleicoes"
+    // CARD AVISOS - Assembleia Geral Ordinária
+    categoria: "Avisos",
+    tipo: "tag-avisos",
+    titulo: "Assembleia Geral Ordinária",
+    texto: "No dia <strong>21 de Janeiro de 2026</strong> será a nossa Assembleia Geral Ordinária.<br><br><strong>Local:</strong> Salão da igreja<br><strong>Horário:</strong> 20h",
+    img: null,
+    isQR: false,
+    extraClass: "card-avisos"
 },
 {
-categoria: "Você Sabia?",
-tipo: "tag-sabia",
-titulo: "Que a Assembleia Geral Ordinária possui uma Finalidade específica?",
-texto: "Ela não é apenas uma reunião qualquer. Ela possui finalidades específicas e obrigatórias definidas em nosso Estatuto.<br><small class='footnote'><strong>Artigo 18º (CI/IPB):</strong> A Assembleia Geral se reunirá ordinariamente, ao menos uma vez por ano, para tratar da matéria mencionada no inciso IV do Artigo 17º e para eleger um secretário de atas.</small>",
-img: null,
-extraClass: ""
+    // CARD VOCÊ SABIA - Dia do Senhor
+    categoria: "Você Sabia?",
+    tipo: "tag-sabia",
+    titulo: "Que o domingo é: O Dia do Senhor!",
+    texto: "Este dia deve ser separado, <strong>EXCLUSIVAMENTE</strong>, para o exercício espiritual, público e particular.<br><small class='footnote'>Confira os Princípios de Liturgia - Capítulo I - Dia do Senhor, artigos 1º, 2º e 3º.</small>",
+    img: null,
+    isQR: false,
+    extraClass: ""
+},
+{
+    // CARD DELIBERAÇÕES - Curso de Formação
+    categoria: "Deliberações do Conselho",
+    tipo: "tag-cons",
+    titulo: "Curso de Formação de Líderes e Oficiais",
+    texto: "Destinado aos homens, membros e congregados da IPA.<br><br>Confira no QR code as informações.",
+    img: "cflo.jpg",
+    isQR: true,
+    extraClass: ""
+},
+{
+    // CARD DELIBERAÇÕES - Eleições
+    categoria: "Deliberações do Conselho",
+    tipo: "tag-cons",
+    titulo: "Eleições",
+    texto: "Edital 2026 para Eleição de Presbítero e Diáconos da IPA.<br><br>Confira no QR code as informações.",
+    img: "edital.jpg",
+    isQR: true,
+    extraClass: "card-eleicoes"
+},
+{
+    // CARD FIQUE LIGADO - Turma de Novos Membros
+    categoria: "Fique ligado",
+    tipo: "tag-fique",
+    titulo: "Turma de Novos Membros",
+    texto: "O início da nova turma será em <strong>Fevereiro de 2026</strong>.<br><br>Interessados devem procurar o Pastor Debson Dias (coordenador da EBD) para realizar a matrícula.",
+    img: null,
+    isQR: false,
+    extraClass: "card-fique-ligado"
 }
 ];
 
