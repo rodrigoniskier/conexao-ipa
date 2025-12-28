@@ -193,25 +193,15 @@ background-position: center;
 .card-eleicoes p { font-size: 1.6rem; }
 .card-eleicoes .image-frame { width: 280px; margin: 0 auto; }
 
-/* --- Card de Aniversariantes com Fotos --- */
-.card-aniversariante h2 {
-    font-size: 2.4rem;
-    margin-bottom: 1rem;
+/* Estilo para lista interna (Diáconos) */
+.lista-compacta {
+    font-size: 1.15rem !important; 
+    line-height: 1.3 !important;
+    margin-top: 10px;
+    padding-left: 20px;
+    list-style-type: disc;
 }
-.card-aniversariante p {
-    font-size: 1.35rem;
-    line-height: 1.4;
-}
-
-/* --- Card Aconteceu IPA --- */
-.card-aconteceu h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-.card-aconteceu p {
-    font-size: 1.5rem;
-    line-height: 1.45;
-}
+.lista-compacta li { margin-bottom: 5px; color: var(--text-secondary); }
 
 /* --- Card Avisos --- */
 .card-avisos h2 {
@@ -264,87 +254,57 @@ object-fit: contain;
 // --- DADOS ATUALIZADOS ---
 const avisos = [
 {
-    // CARD ACONTECEU IPA - Dia do Pastor
-    categoria: "Aconteceu IPA",
-    tipo: "tag-aconteceu",
-    titulo: "Dia do Pastor Presbiteriano!",
-    texto: "O último dia 17 foi o dia do pastor presbiteriano.<br><br><strong>Oremos e apoiemos os nossos pastores!</strong>",
-    img: "pastor.jpg",
-    isQR: false,
-    extraClass: "card-aconteceu"
-},
-{
-    // CARD ANIVERSARIANTES - Rev. Adriano
-    categoria: "Aniversariantes",
-    tipo: "tag-niver",
-    titulo: "Aniversário do Rev. Adriano",
-    texto: "Dia 17 foi o aniversário do nosso querido pastor.<br><br>Louvamos a Deus pela sua vida e ministério.<br><br><strong>Deus seja louvado e renove as suas forças!</strong>",
-    img: "adriano.jpg",
-    isQR: false,
-    extraClass: "card-aniversariante"
-},
-{
-    // CARD ANIVERSARIANTES - Presb. Rodrigo
-    categoria: "Aniversariantes",
-    tipo: "tag-niver",
-    titulo: "Aniversário do Presb. Rodrigo",
-    texto: "Dia 19 foi o aniversário do nosso Presb. Rodrigo Niskier.<br><br>Louvamos a Deus pela sua vida e ministério.<br><br><strong>Deus seja louvado e renove as suas forças!</strong>",
-    img: "rodrigo.jpg",
-    isQR: false,
-    extraClass: "card-aniversariante"
-},
-{
-    // CARD ANIVERSARIANTES - Django
-    categoria: "Aniversariantes",
-    tipo: "tag-niver",
-    titulo: "Aniversário de Django",
-    texto: "Dia 20 foi o aniversário do nosso querido irmão Django.<br><br><strong>Louvamos a Deus pela sua vida e pela benção que é em nosso meio!</strong>",
-    img: "django.jpg",
-    isQR: false,
-    extraClass: "card-aniversariante"
-},
-{
-    // CARD AVISOS - Culto de Natal
-    categoria: "Avisos",
-    tipo: "tag-avisos",
-    titulo: "Culto de Natal - Brilha Jesus!",
-    texto: "Hoje (21/12), no louvor do culto de celebração, teremos uma participação do coral.<br><br><strong>Vamos louvar ao Senhor!</strong>",
-    img: "cantata.jpg",
-    isQR: false,
-    extraClass: "card-avisos"
-},
-{
-    // CARD AVISOS - Culto de Final de Ano
+    // AVISO 1 - CULTO DE FINAL DE ANO
     categoria: "Avisos",
     tipo: "tag-avisos",
     titulo: "Culto de Final de Ano!",
-    texto: "No dia <strong>31/12</strong>, às <strong>22h</strong>, será o nosso culto da virada.<br><br><strong>Venha com o coração cheio de gratidão e esperança!</strong>",
+    texto: "Próxima quarta, às <strong>22h</strong>.<br><br>Esperamos você e a sua família. Vamos agradecer pelo ano que termina e o novo ano que se aproxima!",
     img: null,
     isQR: false,
     extraClass: "card-avisos"
 },
 {
-    // CARD AVISOS - Assembleia Geral Ordinária
+    // AVISO 2 - SEMANA DE ORAÇÃO
     categoria: "Avisos",
     tipo: "tag-avisos",
-    titulo: "Assembleia Geral Ordinária",
-    texto: "No dia <strong>21 de Janeiro de 2026</strong> será a nossa Assembleia Geral Ordinária.<br><br><strong>Local:</strong> Salão da igreja<br><strong>Horário:</strong> 20h",
+    titulo: "Semana de Oração",
+    texto: "<strong>Orai sem cessar!</strong><br>De 05 a 09 de janeiro, das 06h às 07h, na igreja.<br><br>Vamos orar pelas famílias, nação, enfermos, desempregados e pela igreja.",
     img: null,
     isQR: false,
     extraClass: "card-avisos"
 },
 {
-    // CARD VOCÊ SABIA - Dia do Senhor
+    // VOCÊ SABIA - GRUPOS DE DISCIPULADO
     categoria: "Você Sabia?",
     tipo: "tag-sabia",
-    titulo: "Que o domingo é O Dia do Senhor?",
-    texto: "Este dia deve ser separado, <strong>EXCLUSIVAMENTE</strong>, para o exercício espiritual, público e particular.<br><small class='footnote'>Confira os Princípios de Liturgia - Capítulo I - Dia do Senhor, artigos 1º, 2º e 3º.</small>",
+    titulo: "Grupos de Discipulado 2026",
+    texto: "Em 2026 teremos grupos de discipulado funcionando!<br><br>Se você deseja fazer parte de algum grupo, procure o <strong>Presb. Rodrigo</strong>, dê o seu nome e aguarde!",
     img: null,
     isQR: false,
     extraClass: ""
 },
 {
-    // CARD DELIBERAÇÕES - Curso de Formação
+    // VOCÊ SABIA - DIÁCONOS
+    categoria: "Você Sabia?",
+    tipo: "tag-sabia",
+    titulo: "O papel dos Diáconos",
+    texto: "A atividade não é apenas levar água e arrumar cadeiras! A <strong>Junta Diaconal</strong> cuida de:<ul class='lista-compacta'><li>Ordem do culto e patrimônio;</li><li>Levantamento e auxílio aos necessitados;</li><li>Visitação e oração pelos irmãos.</li></ul>",
+    img: null,
+    isQR: false,
+    extraClass: ""
+},
+{
+    // FIQUE LIGADO - SERVIR
+    categoria: "Fique ligado",
+    tipo: "tag-fique",
+    titulo: "É melhor servir!",
+    texto: "Deseja servir a sua igreja em 2026 em alguma área que se identifica?<br><br><strong>Não perca tempo!</strong> Procure o pastor ou os líderes de departamento.",
+    img: null,
+    isQR: false,
+    extraClass: "card-fique-ligado"
+},
+{
+    // MANTER - Curso de Formação (Com Imagem)
     categoria: "Deliberações do Conselho",
     tipo: "tag-cons",
     titulo: "Curso de Formação de Líderes e Oficiais",
@@ -354,7 +314,7 @@ const avisos = [
     extraClass: ""
 },
 {
-    // CARD DELIBERAÇÕES - Eleições
+    // MANTER - Eleições (Com Imagem)
     categoria: "Deliberações do Conselho",
     tipo: "tag-cons",
     titulo: "Eleições",
@@ -362,16 +322,6 @@ const avisos = [
     img: "edital.jpg",
     isQR: true,
     extraClass: "card-eleicoes"
-},
-{
-    // CARD FIQUE LIGADO - Turma de Novos Membros
-    categoria: "Fique ligado",
-    tipo: "tag-fique",
-    titulo: "Turma de Novos Membros",
-    texto: "O início da nova turma será em <strong>Fevereiro de 2026</strong>.<br><br>Interessados devem procurar o Pastor Debson Dias (coordenador da EBD) para realizar a matrícula.",
-    img: null,
-    isQR: false,
-    extraClass: "card-fique-ligado"
 }
 ];
 
